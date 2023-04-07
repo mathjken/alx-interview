@@ -1,22 +1,26 @@
 #!/usr/bin/python3
-'''
-calculates the minimum amount of processes necessary
-to create a certain number of characters.
-You must imagine that there is only one function
-to copy everything and one to paste.
-'''
+
+""" Minimum Operations """
 
 
 def minOperations(n):
-    p = 0
+    """
+    In a text file, there is a single character H. Your text editor can execute
+    only two operations in this file: Copy All and Paste. Given a number n,
+    write a method that calculates the fewest number of operations needed to
+    result in exactly n H characters in the file.
+    Returns an integer
+    If n is impossible to achieve, returns 0
+    """
+    if not isinstance(n, int):
+        return 0
 
-    if n <= 1:
-        return p
-
-    for i in range(2, n + 1):
-        while (0 == n % i):
-            p = p + i
-            n = n / i
-            if n < i:
-                break
-    return p
+    operations = 0
+    iterator = 2
+    while (iterator <= n):
+        if not (n % iterator):
+            n = int(n / iterator)
+            operations += iterator
+            iterator = 1
+        iterator += 1
+    return operations
