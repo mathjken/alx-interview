@@ -5,17 +5,17 @@ to create a certain number of characters.
 '''
 
 
-
 def minOperations(n):
-    x = 0
 
-    if n <= 1:
-        return x
+    if not isinstance(n, int):
+        return 0
 
-    for i in range(2, n + 1):
-        while (0 == n % i):
-            x = x + i
-            n = n / i
-            if n < i:
-                break
-    return x
+        ops = 0
+        i = 2
+        while (i <= n):
+            if not (n % i):
+                n = int(n / i)
+                ops += i
+                i = 1
+                i += 1
+        return ops
