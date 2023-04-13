@@ -1,29 +1,21 @@
 #!/usr/bin/python3
 """
-Module that parses a log and prints stats to stdout
+script that reads stdin line by line and computes metrics
 """
 from sys import stdin
 
-status_codes = {
-    "200": 0,
-    "301": 0,
-    "400": 0,
-    "401": 0,
-    "403": 0,
-    "404": 0,
-    "405": 0,
-    "500": 0
-}
+statusCodes = {"200": 0, "301": 0, "400": 0, "401": 0, "403": 0,
+               "404": 0, "405": 0, "500": 0}
 
 size = 0
 
 
 def print_stats():
-    """Prints the accumulated logs"""
+    """outputs the accumulated logs"""
     print("File size: {}".format(size))
-    for status in sorted(status_codes.keys()):
-        if status_codes[status]:
-            print("{}: {}".format(status, status_codes[status]))
+    for stats in sorted(statusCodes.keys()):
+        if statusCodes[stats]:
+            print("{}: {}".format(stats, statusCodes[stats]))
 
 
 if __name__ == "__main__":
@@ -33,8 +25,8 @@ if __name__ == "__main__":
             try:
                 items = line.split()
                 size += int(items[-1])
-                if items[-2] in status_codes:
-                    status_codes[items[-2]] += 1
+                if items[-2] in statusCodes:
+                    statusCodes[items[-2]] += 1
             except:
                 pass
             if count == 9:
@@ -45,3 +37,4 @@ if __name__ == "__main__":
         print_stats()
         raise
     print_stats()
+
